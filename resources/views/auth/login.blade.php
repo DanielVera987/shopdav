@@ -51,6 +51,13 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+
+            <div class="flex items-center justify-end mt-4">
+
+                <a href="{{ route('login.fb') }}" class="rounded-full py-3 px-6">
+                    {{ __('Iniciar Sesión con Facebook') }}
+                </a>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
