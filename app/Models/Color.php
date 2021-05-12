@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
-{
+class Color extends Model
+{ 
     use HasFactory;
 
     protected $fillable = ['name'];
 
-    public function brand_categories()
-    {
-        return $this->hasMany(BrandCategory::class);
-    }
-
     public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function size()
+    {
+        return $this->belongsToMany(Size::class, 'color_sizes');
     }
 }
