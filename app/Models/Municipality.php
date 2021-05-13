@@ -13,4 +13,9 @@ class Municipality extends Model
         'state_id',
         'name'
     ];
+
+    public function shipping()
+    {
+        return $this->hasMany(Shipping::class);
+    }
 }

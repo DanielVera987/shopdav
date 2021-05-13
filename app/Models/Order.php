@@ -11,8 +11,28 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'order_status_id',
+        'order_statu_id',
         'shipping_type',
-        'shipping_cat',
+        'shipping_cost',
     ];
+
+    public function orderitems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function orderstatu()
+    {
+        return $this->belongsTo(OrderStatu::class, 'order_statu_id');
+    }
+
+    public function shipping()
+    {
+        return $this->hasMany(Shipping::class);
+    }
 }

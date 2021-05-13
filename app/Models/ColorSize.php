@@ -9,5 +9,5 @@ class ColorSize extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['product_id', 'color_id'];
+    protected $fillable = ['size_id', 'color_id'];
 }

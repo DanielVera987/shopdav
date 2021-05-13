@@ -18,11 +18,11 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')
                 ->references('id')
                 ->on('users');
-            $table->foreignId('order_status_id')
+            $table->foreignId('order_statu_id')
                 ->references('id')
                 ->on('order_status');
-            $table->string('shipping_type');
-            $table->string('shipping_cat'); //TODO: Recordar pa que era esto 
+            $table->string('shipping_type'); // Entrega a Domicilio o Tienda
+            $table->float('shipping_cost'); // Costo de Envio
             $table->timestamps();
         });
     }

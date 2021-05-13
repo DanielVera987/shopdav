@@ -13,4 +13,9 @@ class Country extends Model
         'name',
         'abbreviation'
     ];
+
+    public function shipping()
+    {
+        return $this->hasMany(Shipping::class);
+    }
 }

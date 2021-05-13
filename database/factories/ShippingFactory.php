@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Order;
+use App\Models\Shipping;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrderFactory extends Factory
+class ShippingFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Order::class;
+    protected $model = Shipping::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,10 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => '',
-            'order_statu_id' => '',
-            'shipping_type' => 'T',
-            'shipping_cost' => $this->faker->randomFloat(2, 1, 100),
+            'order_id' => 1,
+            'country_id' => 1,
+            'state_id' => 1,
+            'municipality_id' => 1
         ];
     }
 }
