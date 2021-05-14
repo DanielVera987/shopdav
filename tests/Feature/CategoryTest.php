@@ -29,10 +29,9 @@ class CategoryTest extends TestCase
      * @return void
      */
     
-    /* public function test_category_screen_can_be_rendered()
+    public function test_category_screen_can_be_rendered()
     {
-        $response = $this->get('/category');
-
+        $response = $this->get('/categories');
         $response->assertStatus(200);
     }
 
@@ -44,5 +43,5 @@ class CategoryTest extends TestCase
     public function test_create_new_category_with_admin()
     {
 
-    } */
+    }
 }
