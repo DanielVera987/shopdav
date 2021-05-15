@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 // Authenticated users routes
 Route::middleware('auth', 'role:user')->group(function () {

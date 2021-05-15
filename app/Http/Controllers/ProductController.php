@@ -46,7 +46,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product = Product::with('brand', 'subcategory', 'discount', 'images', 'sizes')->find($product->id);
+        $products = Product::limit(8)->get();
+        //return $product;
+        return view('products.show', compact('product', 'products'));
     }
 
     /**

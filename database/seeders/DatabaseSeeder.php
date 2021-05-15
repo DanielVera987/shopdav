@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
         Discount::factory()->count(3)->create();
 
         $products = Product::factory()
-            ->count(5)
+            ->count(10)
             ->for(Subcategory::factory()->for(Category::factory()->create())->create())
             ->for(Brand::factory()->create())
             ->for(Discount::factory()->create())
