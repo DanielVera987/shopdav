@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
@@ -13,6 +14,7 @@ class ShopController extends Controller
     
     public function index()
     {
-        return view('shop.index');
+        $categories = Category::select('id', 'name')->get();
+        return view('shop.index', compact('categories'));
     }
 }

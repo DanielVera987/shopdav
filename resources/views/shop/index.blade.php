@@ -7,9 +7,9 @@
   <div>
     <div class="w-full flex flex-col lg:flex-row lg:px-6">
       <div class="w-full lg:w-56 relative">
-        <div
-          class="py-3 bg-white w-full flex items-center justify-center lg:hidden cursor-pointer font-bold"
-        >
+
+        <!-- SideBar Mobile -->
+        <div class="py-3 bg-white w-full flex items-center justify-center lg:hidden cursor-pointer font-bold" >
           Change Filters
           <svg
             aria-hidden="true"
@@ -20,6 +20,7 @@
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
+            width=20
           >
             <path
               fill="currentColor"
@@ -27,75 +28,21 @@
             ></path>
           </svg>
         </div>
+
         <!-- On mobile hide and show this section using hidden and flex begin -->
         <div
-          class="hidden absolute left-0 px-6 lg:px-auto bg-white w-full lg:w-auto z-50 mt-10 lg:mt-0 lg:sticky top-0 pt-6 pb-24 lg:flex flex-col lg:max-h-screen"
-        >
+          class="hidden absolute left-0 px-6 lg:px-auto bg-white w-full lg:w-auto z-40 mt-10 lg:mt-0 lg:sticky top-0 pt-6 pb-24 lg:flex flex-col"
+          >
           <div class="border-b border-gray-300">
-            <a class="text-sm font-bold text-blue-400 underline"
-              >Change Address</a
-            >
-            <div class="my-6">
-              <div class="">
-                <div class="">
-                  <div class="flex items-center mb-3 last:mb-0">
-                    <input
-                      name="service"
-                      type="radio"
-                      class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                      id="delivery-service"
-                      value="delivery"
-                      checked=""
-                    /><label class="ml-2 text-sm" for="delivery-service"
-                      >Delivery</label
-                    >
-                  </div>
-                  <div class="flex items-center mb-3 last:mb-0">
-                    <input
-                      name="service"
-                      type="radio"
-                      class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                      id="curbside-service"
-                      value="curbside"
-                    /><label class="ml-2 text-sm" for="curbside-service"
-                      >Curbside</label
-                    >
-                  </div>
-                  <div class="flex items-center mb-3 last:mb-0">
-                    <input
-                      name="service"
-                      type="radio"
-                      class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                      id="orderin-service"
-                      value="orderin"
-                    /><label class="ml-2 text-sm" for="orderin-service"
-                      >Order In</label
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
+            <a class="text-sm font-bold text-blue-400 underline">
+              Change Address
+            </a>
           </div>
-          <div class="flex-1 lg:overflow-y-scroll">
+
+          <div class="flex-1">
             <div class="border-b border-gray-300 py-6">
               <div class="flex items-center justify-between cursor-pointer">
-                <h5 class="text-sm font-bold">Sort</h5>
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fas"
-                  data-icon="chevron-up"
-                  class="svg-inline--fa fa-chevron-up fa-w-14 text-blue-400 text-base"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  width="20"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"
-                  ></path>
-                </svg>
+                <h5 class="text-sm font-bold">Ordenar</h5>
               </div>
               <div class="my-6">
                 <div class="">
@@ -108,7 +55,7 @@
                         id="distance-sort"
                         value="distance"
                       /><label class="ml-2 text-sm" for="distance-sort"
-                        >Distance</label
+                        >precios bajos y altos</label
                       >
                     </div>
                     <div class="flex items-center mb-3 last:mb-0">
@@ -119,7 +66,7 @@
                         id="popular-sort"
                         value="popular"
                       /><label class="ml-2 text-sm" for="popular-sort"
-                        >Popularity</label
+                        >precios altos y bajos</label
                       >
                     </div>
                     <div class="flex items-center mb-3 last:mb-0">
@@ -131,7 +78,7 @@
                         value="topRated"
                         checked=""
                       /><label class="ml-2 text-sm" for="topRated-sort"
-                        >Top Rated</label
+                        >Mas Comprados</label
                       >
                     </div>
                     <div class="flex items-center mb-3 last:mb-0">
@@ -139,90 +86,34 @@
                         name="sort"
                         type="radio"
                         class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                        id="atoz-sort"
-                        value="atoz"
-                      /><label class="ml-2 text-sm" for="atoz-sort">A to Z</label>
+                        id="topRated-sort"
+                        value="topRated"
+                        checked=""
+                      /><label class="ml-2 text-sm" for="topRated-sort"
+                        >Descuentos</label
+                      >
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="border-b border-gray-300 py-6">
               <div class="flex items-center justify-between cursor-pointer">
-                <h5 class="text-sm font-bold">Dietary</h5>
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fas"
-                  data-icon="chevron-up"
-                  class="svg-inline--fa fa-chevron-up fa-w-14 text-blue-400 text-base"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  width="20"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"
-                  ></path>
-                </svg>
+                <h5 class="text-sm font-bold">Categorias</h5>
               </div>
-              <div class="my-6">
-                <div class="w-full flex items-center">
-                  <input
-                    type="checkbox"
-                    name="organic"
-                    class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                  /><label class="ml-2 text-sm" for="organic">Organic</label>
+              @foreach ($categories as $category)    
+                <div class="my-6">
+                  <div class="w-full flex items-center">
+                    <input
+                      type="checkbox"
+                      name="organic"
+                      class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
+                      value="{{ $category->id }}"
+                    /><label class="ml-2 text-sm" for="organic">{{ $category->name }}</label>
+                  </div>
                 </div>
-              </div>
-              <div class="my-6">
-                <div class="w-full flex items-center">
-                  <input
-                    type="checkbox"
-                    name="gluten-free"
-                    class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                  /><label class="ml-2 text-sm" for="gluten-free"
-                    >Gluten Free</label
-                  >
-                </div>
-              </div>
-              <div class="my-6">
-                <div class="w-full flex items-center">
-                  <input
-                    type="checkbox"
-                    name="kosher"
-                    class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                  /><label class="ml-2 text-sm" for="kosher">Kosher</label>
-                </div>
-              </div>
-              <div class="my-6">
-                <div class="w-full flex items-center">
-                  <input
-                    type="checkbox"
-                    name="paleo"
-                    class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                  /><label class="ml-2 text-sm" for="paleo">Paleo</label>
-                </div>
-              </div>
-              <div class="my-6">
-                <div class="w-full flex items-center">
-                  <input
-                    type="checkbox"
-                    name="vegan"
-                    class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                  /><label class="ml-2 text-sm" for="vegan">Vegan</label>
-                </div>
-              </div>
-              <div class="my-6">
-                <div class="w-full flex items-center">
-                  <input
-                    type="checkbox"
-                    name="halal"
-                    class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                  /><label class="ml-2 text-sm" for="halal">Halal</label>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -236,7 +127,7 @@
           We are now offering contactless delivery in light of COVID-19.
         </div>
         <div class="mt-12">
-          <h1 class="text-3xl font-bold">Recommended For You</h1>
+          <h1 class="text-3xl font-bold">Recomendaciones</h1>
           <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
             <a href="#"
               ><div
