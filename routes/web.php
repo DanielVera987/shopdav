@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 // Open Routes
@@ -10,6 +11,7 @@ Route::get('/', [FrontendController::class, 'index'])->name('index');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 
 // Authenticated users routes
 Route::middleware('auth', 'role:user')->group(function () {
