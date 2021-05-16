@@ -10,8 +10,14 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        $products = Product::with('images')->limit(8)->get();
-        $categories = Category::limit(8)->get();
-        return view('welcome', compact('products', 'categories'));
+        $categories = Category::select('id', 'name', 'image')->limit(8)->get();
+        return view('welcome', compact('categories'));
+    }
+
+    public function shop_index()
+    {
+        $categories = Category::select('id', 'name')->get();
+        $products = Product::with('brand', 'subcategory', 'discount')->get();
+        return view('shop.index', compact('categories', 'products'));
     }
 }

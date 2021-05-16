@@ -34,7 +34,7 @@
           class="hidden absolute left-0 px-6 lg:px-auto bg-white w-full lg:w-auto z-40 mt-10 lg:mt-0 lg:sticky top-0 pt-6 pb-24 lg:flex flex-col"
           >
           <div class="border-b border-gray-300">
-            <a class="text-sm font-bold text-blue-400 underline">
+            <a class="text-sm font-bold underline">
               Change Address
             </a>
           </div>
@@ -121,7 +121,7 @@
       </div>
       <div class="flex-1 lg:pl-12 py-6 px-6 lg:px-0">
         <div
-          class="w-full px-6 py-3 rounded-sm border text-green-800 bg-green-400 border-green-500"
+          class="w-full px-6 py-3 rounded-sm border text-gray-900 bg-gray-300 border-gray-400"
           role="alert"
         >
           We are now offering contactless delivery in light of COVID-19.
@@ -129,326 +129,40 @@
         <div class="mt-12">
           <h1 class="text-3xl font-bold">Recomendaciones</h1>
           <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
-            <a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
+            @foreach($products as $product)
+            <a href="{{ route('products.show',$product->id) }}">
+              <div class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white">
                 <div class="w-full h-48">
                   <img
-                    src="https://images.unsplash.com/photo-1566740933430-b5e70b06d2d5?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
+                    src="{{ $product->images[0]->path ?? 'https://placeimg.com/640/480/any' }}"
                     class="w-full h-full object-cover"
-                  />
+                    />
                 </div>
                 <div class="p-6">
                   <div class="text-sm">
-                    <h3 class="font-bold text-base">Burritown</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.7
-                    </div>
+                    <h3 class="font-bold text-base">{{ $product->name }}</h3>
                     <p class="mt-1">
-                      <span>Burritos · </span><span>Salads · </span
-                      ><span>Mexican · </span><span>Chicken </span>
+                      <span class="text-gray-400">{{ $product->brand->name }}</span>
                     </p>
-                    <p>1.5 miles away · $$</p>
+                    <p class="mt-1">
+                      <span>{{ $product->subcategory->name }} · </span>
+                    </p>
+                    <p>
+                      <span class="text-lg font-bold"> ${{ $product->price }}</span>
+                      @if ($product->discunt != null)  
+                        <span class="line-through"> ${{ $product->price }}</span>
+                        <span class="line-through"> ${{ $product->discount->discount_percent }}</span>
+                      @endif
+                    </p>
+                    <p class="text-center">
+                      <button class="w-full py-2 rounded bg-gray-300 uppercase font-bold hover:bg-gray-400" href="#">CARRITO</button>
+                    </p>
                   </div>
                 </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Sushi Blue</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.2
-                    </div>
-                    <p class="mt-1">
-                      <span>Sushi · </span><span>Japanese </span>
-                    </p>
-                    <p>1.1 miles away · $$</p>
-                  </div>
-                </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1577859623802-b5e3ca51f885?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Three Aunts</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.9
-                    </div>
-                    <p class="mt-1">
-                      <span>Chinese · </span><span>BBQ · </span
-                      ><span>Chicken · </span><span>Noodles </span>
-                    </p>
-                    <p>2.5 miles away · $$$</p>
-                  </div>
-                </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1542676303584-c8043a6c7618?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Farmer P</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.2
-                    </div>
-                    <p class="mt-1">
-                      <span>Chicken · </span><span>Mediterranean · </span
-                      ><span>British · </span><span>Healthy </span>
-                    </p>
-                    <p>3.5 miles away · $</p>
-                  </div>
-                </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1572137162111-fc6e04414e21?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Bagel King</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.1
-                    </div>
-                    <p class="mt-1">
-                      <span>Bagels · </span><span>Breakfast · </span
-                      ><span>Dessert </span>
-                    </p>
-                    <p>1.6 miles away · $</p>
-                  </div>
-                </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1571917411767-20545014a0bc?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Mr. Banh Mi</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.6
-                    </div>
-                    <p class="mt-1">
-                      <span>Sandwiches · </span><span>Vietnamese · </span
-                      ><span>Noodles · </span><span>Drinks </span>
-                    </p>
-                    <p>1.5 miles away · $$</p>
-                  </div>
-                </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1557872943-16a5ac26437e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Fancy Ramen</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.8
-                    </div>
-                    <p class="mt-1">
-                      <span>Ramen · </span><span>Noodles · </span
-                      ><span>Japanese </span>
-                    </p>
-                    <p>3.2 miles away · $$$$</p>
-                  </div>
-                </div>
-              </div></a
-            ><a href="#"
-              ><div
-                class="mx-auto cursor-pointer h-full hover:border-gray-400 transform transition-all duration-200 ease hover:-translate-y-1 shadow-sm w-72 max-w-full border border-gray-300 rounded-sm bg-white"
-              >
-                <div class="w-full h-48">
-                  <img
-                    src="https://images.unsplash.com/photo-1579751626657-72bc17010498?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=500&amp;q=60"
-                    class="w-full h-full object-cover"
-                  />
-                </div>
-                <div class="p-6">
-                  <div class="text-sm">
-                    <h3 class="font-bold text-base">Pizzzza</h3>
-                    <div class="flex items-center text-green-400">
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="svg-inline--fa fa-star fa-w-18 mr-2"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                        width="20"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path>
-                      </svg>
-                      4.3
-                    </div>
-                    <p class="mt-1">
-                      <span>Pizza · </span><span>Italian · </span
-                      ><span>Dessert </span>
-                    </p>
-                    <p>1.5 miles away · $</p>
-                  </div>
-                </div>
-              </div></a
-            >
+                
+              </div>
+            </a>
+            @endforeach
           </div>
         </div>
       </div>
