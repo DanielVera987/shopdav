@@ -155,7 +155,7 @@
                       @endif
                     </p>
                     <p class="text-center">
-                      <button class="w-full py-2 rounded bg-gray-300 uppercase font-bold hover:bg-gray-400" href="#">CARRITO</button>
+                      <button class="w-full py-2 rounded bg-gray-300 uppercase font-bold hover:bg-gray-400 btn-shop-add-cart" data-id="{{ $product->id }}" data-price="{{ $product->price }}" href="#">CARRITO</button>
                     </p>
                   </div>
                 </div>
