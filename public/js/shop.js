@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         e.addEventListener('click', (e) => {
 
           e.preventDefault();
-          console.log(e.target.getAttribute('data-id'));
-          console.log('Hola')
+          console.log(e.target.getAttribute('data-id'), e.target.getAttribute('data-price'));
 
         });
 

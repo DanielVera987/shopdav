@@ -120,6 +120,8 @@
         <!-- On mobile hide and show this section using hidden and flex end -->
       </div>
       <div class="flex-1 lg:pl-12 py-6 px-6 lg:px-0">
+        {{ Breadcrumbs::render('shop') }}
+        <br>
         <div
           class="w-full px-6 py-3 rounded-sm border text-gray-900 bg-gray-300 border-gray-400"
           role="alert"
@@ -148,10 +150,11 @@
                       <span>{{ $product->subcategory->name }} · </span>
                     </p>
                     <p>
-                      <span class="text-lg font-bold"> ${{ $product->price }}</span>
-                      @if ($product->discunt != null)  
-                        <span class="line-through"> ${{ $product->price }}</span>
-                        <span class="line-through"> ${{ $product->discount->discount_percent }}</span>
+                      @if ($product->discount != null)  
+                        <span class="line-through text-red-600"> ${{ $product->price }}</span>
+                        <span class="text-lg font-bold"> ${{ round(($product->price * $product->discount->discount_percent) / 100, 2) }}</span>
+                      @else 
+                        <span class="text-lg font-bold"> ${{ $product->price }}</span>
                       @endif
                     </p>
                     <p class="text-center">

@@ -3,7 +3,7 @@
   <x-slot name="nav">
       <x-nav />
   </x-slot>
-
+  {{ Breadcrumbs::render('product', $product) }}
   <section class="text-gray-700 body-font overflow-hidden bg-white">
     <div class="container px-5 py-24 mx-auto">
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
