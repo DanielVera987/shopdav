@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -14,10 +15,11 @@ class FrontendController extends Controller
         return view('welcome', compact('categories'));
     }
 
-    public function shop_index()
+    public function shop_index(Request $request)
     {
-        $categories = Category::select('id', 'name')->get();
-        $products = Product::with('brand', 'subcategory', 'discount')->get();
-        return view('shop.index', compact('categories', 'products'));
+        $subcategories = Subcategory::with('product')->select('id', 'name')->get();
+        $products = Product::filtersAnPaginate();
+
+        return view('shop.index', compact('subcategories', 'products'));
     }
 }

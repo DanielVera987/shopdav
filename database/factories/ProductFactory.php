@@ -29,7 +29,7 @@ class ProductFactory extends Factory
             'quantity' => $this->faker->randomDigit(), 
             'subcategory_id' => '', 
             'brand_id' => '', 
-            'discount_id' => ''
+            'discount_id' => null
         ];
     }
 }

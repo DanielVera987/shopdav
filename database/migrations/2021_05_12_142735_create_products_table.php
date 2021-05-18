@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
                 ->references('id')
                 ->on('brands');
             $table->foreignId('discount_id')
+                ->nullable()
                 ->references('id')
                 ->on('discounts');
             $table->timestamps();

@@ -10,7 +10,7 @@
 
         <!-- SideBar Mobile -->
         <div class="py-3 bg-white w-full flex items-center justify-center lg:hidden cursor-pointer font-bold" >
-          Change Filters
+          Aplicar Filtros
           <svg
             aria-hidden="true"
             focusable="false"
@@ -30,93 +30,107 @@
         </div>
 
         <!-- On mobile hide and show this section using hidden and flex begin -->
-        <div
-          class="hidden absolute left-0 px-6 lg:px-auto bg-white w-full lg:w-auto z-40 mt-10 lg:mt-0 lg:sticky top-0 pt-6 pb-24 lg:flex flex-col"
-          >
-          <div class="border-b border-gray-300">
-            <a class="text-sm font-bold underline">
-              Change Address
-            </a>
-          </div>
-
-          <div class="flex-1">
-            <div class="border-b border-gray-300 py-6">
-              <div class="flex items-center justify-between cursor-pointer">
-                <h5 class="text-sm font-bold">Ordenar</h5>
-              </div>
-              <div class="my-6">
-                <div class="">
-                  <div class="">
-                    <div class="flex items-center mb-3 last:mb-0">
-                      <input
-                        name="sort"
-                        type="radio"
-                        class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                        id="distance-sort"
-                        value="distance"
-                      /><label class="ml-2 text-sm" for="distance-sort"
-                        >precios bajos y altos</label
-                      >
-                    </div>
-                    <div class="flex items-center mb-3 last:mb-0">
-                      <input
-                        name="sort"
-                        type="radio"
-                        class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                        id="popular-sort"
-                        value="popular"
-                      /><label class="ml-2 text-sm" for="popular-sort"
-                        >precios altos y bajos</label
-                      >
-                    </div>
-                    <div class="flex items-center mb-3 last:mb-0">
-                      <input
-                        name="sort"
-                        type="radio"
-                        class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                        id="topRated-sort"
-                        value="topRated"
-                        checked=""
-                      /><label class="ml-2 text-sm" for="topRated-sort"
-                        >Mas Comprados</label
-                      >
-                    </div>
-                    <div class="flex items-center mb-3 last:mb-0">
-                      <input
-                        name="sort"
-                        type="radio"
-                        class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
-                        id="topRated-sort"
-                        value="topRated"
-                        checked=""
-                      /><label class="ml-2 text-sm" for="topRated-sort"
-                        >Descuentos</label
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <form action="{{ route('shop.index') }}" method="GET">
+          <div
+            class="hidden absolute left-0 px-6 lg:px-auto bg-white w-full lg:w-auto z-40 mt-10 lg:mt-0 lg:sticky top-0 pt-6 pb-24 lg:flex flex-col"
+            >
+            <div class="border-b border-gray-300">
+              <button type="submit" class="text-sm font-bold underline">
+                Aplicar Filtros
+              </button>
             </div>
 
-            <div class="border-b border-gray-300 py-6">
-              <div class="flex items-center justify-between cursor-pointer">
-                <h5 class="text-sm font-bold">Categorias</h5>
-              </div>
-              @foreach ($categories as $category)    
+            <div class="flex-1">
+              <div class="border-b border-gray-300 py-6">
+                <div class="flex items-center justify-between cursor-pointer">
+                  <h5 class="text-sm font-bold">Ordenar</h5>
+                </div>
                 <div class="my-6">
-                  <div class="w-full flex items-center">
-                    <input
-                      type="checkbox"
-                      name="organic"
-                      class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
-                      value="{{ $category->id }}"
-                    /><label class="ml-2 text-sm" for="organic">{{ $category->name }}</label>
+                  <div class="">
+                    <div class="">
+                      <div class="flex items-center mb-3 last:mb-0">
+                        <input
+                          name="sort"
+                          type="radio"
+                          class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
+                          id="all-sort"
+                          value="all"
+                        /><label class="ml-2 text-sm" for="all-sort"
+                          >Todos</label
+                        >
+                      </div>
+                      <div class="flex items-center mb-3 last:mb-0">
+                        <input
+                          name="sort"
+                          type="radio"
+                          class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
+                          id="<-sort"
+                          value="<"
+                        /><label class="ml-2 text-sm" for="<-sort"
+                          >precios menor a mayor</label
+                        >
+                      </div>
+                      <div class="flex items-center mb-3 last:mb-0">
+                        <input
+                          name="sort"
+                          type="radio"
+                          class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
+                          id=">-sort"
+                          value=">"
+                        /><label class="ml-2 text-sm" for=">-sort"
+                          >precios mayor a menor</label
+                        >
+                      </div>
+                      <div class="flex items-center mb-3 last:mb-0">
+                        <input
+                          name="sort"
+                          type="radio"
+                          class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
+                          id="sends-sort"
+                          value="sends"
+                        /><label class="ml-2 text-sm" for="sends-sort"
+                          >Mas Comprados</label
+                        >
+                      </div>
+                      <div class="flex items-center mb-3 last:mb-0">
+                        <input
+                          name="sort"
+                          type="radio"
+                          class="appearance-none w-6 h-6 border border-gray-300 rounded-full outline-none cursor-pointer checked:bg-blue-400"
+                          id="discounts-sort"
+                          value="by_discount"
+                        /><label class="ml-2 text-sm" for="discounts-sort"
+                          >Descuentos</label
+                        >
+                      </div>
+                    </div>
                   </div>
                 </div>
-              @endforeach
+              </div>
+
+              <div class="border-b border-gray-300 py-6">
+                <div class="flex items-center justify-between cursor-pointer">
+                  <h5 class="text-sm font-bold">Categorias</h5>
+                </div>
+                @foreach ($subcategories as $index => $subcategory)    
+                  <div class="my-6">
+                    <div class="w-full flex items-center">
+                      <input
+                        type="checkbox"
+                        name="categories[{{$index}}]"
+                        class="appearance-none w-6 h-6 border border-gray-300 rounded-sm outline-none cursor-pointer checked:bg-blue-400"
+                        value="{{ $subcategory->id }}"
+                        @if(isset(Request::get('categories')[$index]) && Request::get('categories')[$index] == $subcategory->id) 
+                          checked="true"
+                        @endif
+                      /><label class="ml-2 text-sm" for="organic">{{ $subcategory->name }} <span class="text-gray-400">({{ $subcategory->product->count() }})</span></label>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
             </div>
           </div>
-        </div>
+        </form>
         <!-- On mobile hide and show this section using hidden and flex end -->
       </div>
       <div class="flex-1 lg:pl-12 py-6 px-6 lg:px-0">
@@ -130,6 +144,8 @@
         </div>
         <div class="mt-12">
           <h1 class="text-3xl font-bold">Recomendaciones</h1>
+          {{ $products->links() }}
+
           <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
             @foreach($products as $product)
             <a href="{{ route('products.show',$product->id) }}">
@@ -151,8 +167,8 @@
                     </p>
                     <p>
                       @if ($product->discount != null)  
-                        <span class="line-through text-red-600"> ${{ $product->price }}</span>
-                        <span class="text-lg font-bold"> ${{ round(($product->price * $product->discount->discount_percent) / 100, 2) }}</span>
+                        <span class="line-through text-lg text-red-400 font-bold"> ${{ $product->price }}</span>
+                        <span class="font-bold"> ${{ round(($product->price * $product->discount->discount_percent) / 100, 2) }}</span>
                       @else 
                         <span class="text-lg font-bold"> ${{ $product->price }}</span>
                       @endif
@@ -167,6 +183,10 @@
             </a>
             @endforeach
           </div>
+
+          <br />
+
+          {{ $products->links() }}
         </div>
       </div>
     </div>
