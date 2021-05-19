@@ -67,7 +67,7 @@
                           id="<-sort"
                           value="<"
                         /><label class="ml-2 text-sm" for="<-sort"
-                          >precios menor a mayor</label
+                          >Precios menor a mayor</label
                         >
                       </div>
                       <div class="flex items-center mb-3 last:mb-0">
@@ -78,7 +78,7 @@
                           id=">-sort"
                           value=">"
                         /><label class="ml-2 text-sm" for=">-sort"
-                          >precios mayor a menor</label
+                          >Precios mayor a menor</label
                         >
                       </div>
                       <div class="flex items-center mb-3 last:mb-0">
@@ -89,7 +89,7 @@
                           id="sends-sort"
                           value="sends"
                         /><label class="ml-2 text-sm" for="sends-sort"
-                          >Mas Comprados</label
+                          >Mas comprados</label
                         >
                       </div>
                       <div class="flex items-center mb-3 last:mb-0">

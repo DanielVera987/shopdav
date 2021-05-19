@@ -2,13 +2,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
   const d = document;
   const querystring = window.location.search;
   const params = new URLSearchParams(querystring);
+  const $notification_add_cart = document.querySelector('.notification-cart-add');
+  const $cart_count = document.querySelector('#cart_count');
 
   setTimeout( () => {
     document.querySelector('.cs-loader').classList.add('hidden');
-  } , 3000);
+  } , 2000);
 
   /**
-   * Function Anonima Add_Cart
+   * Check if have cart items
+   */
+  (() => {
+    axios.get('/cart/totals')
+      .then((response) => {
+        $cart_count.textContent = response.data.total;
+      })
+  })();
+
+  /**
+   * Function Add_Cart
    */
   (function add_cart(d){
     d.querySelectorAll('.btn-shop-add-cart')
@@ -17,7 +29,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
         e.addEventListener('click', (e) => {
 
           e.preventDefault();
-          console.log(e.target.getAttribute('data-id'), e.target.getAttribute('data-price'));
+          const product_id = e.target.getAttribute('data-id'); 
+
+          axios.post('/cart-add', {
+              product_id,
+            })
+            .then(function (response) {
+              // handle success
+              $notification_add_cart.classList.remove('hidden');
+              $cart_count.textContent = response.data.total;
+
+              setTimeout(() => {
+                $notification_add_cart.classList.add('hidden');
+              }, 4000);
+            })
+            .catch(function (error) {
+              // handle error
+              console.log(error);
+            })
+            .then(function () {
+              // always executed
+            });
 
         });
 

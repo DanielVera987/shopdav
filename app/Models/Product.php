@@ -66,6 +66,11 @@ class Product extends Model
         return $this->belongsToMany(Color::class, 'color_products');
     }
 
+    public function cart()
+    {
+        return $this->belongsToMany(Cart::class, 'cart_items');
+    }
+
     public function scopeOrderByPrice($query, $order = '')
     {
         if ($order == '<' || $order == '>') {

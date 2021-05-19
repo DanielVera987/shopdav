@@ -19,6 +19,11 @@ Breadcrumbs::for('product', function ($trail, $product) {
   $trail->push($product->name, route('products.show', $product->id));
 });
 
+Breadcrumbs::for('checkout', function ($trail) {
+    $trail->parent('shop');
+    $trail->push('Checkout', route('cart.checkout'));
+  });
+
 /* // Home > Blog > [Category] > [Post]
 Breadcrumbs::for('post', function ($trail, $post) {
     $trail->parent('category', $post->category);
