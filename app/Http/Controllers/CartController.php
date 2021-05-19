@@ -36,8 +36,9 @@ class CartController extends Controller
     public function checkout()
     {
         $cart = \Cart::getContent();
+        $subtotal = \Cart::getSubTotal();
 
-        return view('cart.checkout', compact('cart'));
+        return view('cart.checkout', compact('cart', 'subtotal'));
     }
 
     public function clear()
