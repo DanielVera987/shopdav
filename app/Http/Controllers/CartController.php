@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function condition_tax()
+    {
+        $condition = new \Darryldecode\Cart\CartCondition([
+            'name' => 'IVA 16%',
+            'type' => 'tax',
+            'target' => 'total',
+            'value' => '16.00%',
+            'attribute' => [
+                'description' => 'Value added tax'
+            ]
+        ]);
+
+        \Cart::condition($condition);
+    }
 
     public function add(Request $request)
     {
@@ -34,11 +48,17 @@ class CartController extends Controller
     }
 
     public function checkout()
-    {
+    {   
+        $this->condition_tax();
+
         $cart = \Cart::getContent();
         $subtotal = \Cart::getSubTotal();
+        $total = \Cart::getTotal();
+        $condition_tax = \Cart::getCondition('IVA 16%');
+        $tax = $condition_tax->getValue();
+        $conditionCalculatedValue = $condition_tax->getCalculatedValue($subtotal);
 
-        return view('cart.checkout', compact('cart', 'subtotal'));
+        return view('cart.checkout', compact('cart', 'subtotal', 'total', 'tax', 'conditionCalculatedValue'));
     }
 
     public function clear()

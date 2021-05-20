@@ -88,5 +88,6 @@
         </footer>
 
         <script src="{{ asset('js/shop.js') }}"></script>
+        <script src="{{ asset('js/checkout.js') }}"></script>
   </body>
 </html>

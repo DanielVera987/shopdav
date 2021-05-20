@@ -10,6 +10,7 @@
     <div class="my-6">
       <div class="flex flex-col w-full p-8 text-gray-800 bg-white pin-r pin-y">
         <div class="flex-1">
+          <input type="hidden" id="tax" value="{{$tax}}">
           <table class="w-full text-sm lg:text-base" cellspacing="0">
             <thead>
               <tr class="h-12 uppercase">
@@ -19,7 +20,7 @@
                   <span class="lg:hidden" title="Quantity">Cant.</span>
                   <span class="hidden lg:inline">Cantidad</span>
                 </th>
-                <th class="hidden text-right md:table-cell">Precio</th>
+                <th class="hidden text-right md:table-cell">Precio Unit.</th>
                 <th class="text-right">Total</th>
               </tr>
             </thead>
@@ -46,8 +47,10 @@
                       <td class="justify-center md:justify-end md:flex mt-6">
                         <div class="w-20 h-10">
                           <div class="relative flex flex-row w-full h-8">
-                          <input type="number" value="{{ $item->quantity }}" 
-                            class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                          <input type="number" value="{{ $item->quantity }}" min="1"
+                            data-price-unit="{{ $item->price }}"
+                            data-id="{{ $item->id }}"
+                            class="qty w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
                           </div>
                         </div>
                       </td>
@@ -58,11 +61,14 @@
                       </td>
                       <td class="text-right">
                         <span class="text-sm lg:text-base font-medium">
-                          $ {{ $item->price }}
+                          $ <span class="txt_total_{{$item->id}} items_totals">{{ $item->price }}</span>
                         </span>
                       </td>
-                    </tr> 
-                  @endforeach   
+                    </tr>
+                  @endforeach
+                  <div class="w-full text-center">
+                    <a class="text-center" href="{{ route('cart.clear') }}">Limpiar Carrito</a>
+                  </div>   
               @else
                 <tr>
                   <td colspan="5" class="px-6 py-4 whitespace-nowrap">
@@ -72,16 +78,25 @@
                       </div>
                   </td>
                 </tr>
+                <tr>
+                  <td colspan="5" class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-center">
+                      <div class="text-sm font-medium text-gray-900">
+                        <a href="{{ route('shop.index') }}">Seguir Comprando</a>
+                      </div>
+                  </td>
+                </tr>
               @endif
             </tbody>
           </table>
+         
           <hr class="pb-6 mt-6">
           <div class="my-4 mt-6 -mx-2 lg:flex">
             <div class="lg:px-2 lg:w-1/2">
               <div class="p-4 bg-gray-100 rounded-full">
                 <h1 class="ml-2 font-bold uppercase">Cupon</h1>
               </div>
-              <div class="p-4">
+              <div class="p-4"> 
                 <p class="mb-4 italic"> Si tiene un código de cupón, ingréselo en el cuadro a continuación</p>
                 <div class="justify-center md:flex">
                   <form action="" method="POST">
@@ -107,7 +122,7 @@
                     <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
                       Subtotal
                     </div>
-                    <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
+                    <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900" id="subtotal">
                       {{ $subtotal }}
                     </div>
                   </div>
@@ -134,10 +149,10 @@
                     </div>
                     <div class="flex justify-between pt-4 border-b">
                       <div class="lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-center text-gray-800">
-                        Tax
+                        IVA 16%
                       </div>
-                      <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                        2,976.55€
+                      <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900" id="iva">
+                        {{$conditionCalculatedValue}}
                       </div>
                     </div>
                     <div class="flex justify-between pt-4 border-b">
@@ -145,7 +160,10 @@
                         Total
                       </div>
                       <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                        17,859.3€
+                        $
+                        <span id="total">
+                          {{$total}}
+                        </span>
                       </div>
                     </div>
                   <a href="#">
