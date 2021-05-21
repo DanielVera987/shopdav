@@ -46,11 +46,6 @@ class Product extends Model
         return $this->belongsTo(Discount::class);
     }
 
-    public function coupons()
-    {
-        return $this->hasMany(Coupon::class);
-    }
-
     public function images()
     {
         return $this->hasMany(Image::class);

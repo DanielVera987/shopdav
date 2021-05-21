@@ -68,6 +68,18 @@ class CartController extends Controller
         return redirect()->route('shop.index');
     }
 
+    public function editItem($id, Request $request)
+    {
+        \Cart::update($id, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $request->qty
+            ),
+        ));
+
+        return request()->json(200);
+    }
+
     public function removeitem($id)
     {
         \Cart::remove($id);

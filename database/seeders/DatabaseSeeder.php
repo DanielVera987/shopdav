@@ -83,11 +83,6 @@ class DatabaseSeeder extends Seeder
             ->for(Discount::factory()->create())
             ->create();
 
-        Coupon::factory()
-            ->count(3)
-            ->for($product)
-            ->create();
-
         Image::factory()
             ->count(4)
             ->for($product)

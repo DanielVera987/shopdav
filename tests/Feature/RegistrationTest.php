@@ -30,20 +30,14 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
-        Role::create(['name' => 'user']);
-
         $response = $this->post('/register', [
             'name' => 'Test User',
             'surname' => 'test',
-            'email' => 'test@example.com',
+            'email' => 'test1@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);
-
-        $user = User::find(1);
-
-        $this->assertTrue($user->fresh()->hasRole('user'));
-
+        
         $this->assertAuthenticated();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }

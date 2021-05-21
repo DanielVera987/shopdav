@@ -19,8 +19,4 @@ class Coupon extends Model
         'end_date'
     ];
 
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
 }

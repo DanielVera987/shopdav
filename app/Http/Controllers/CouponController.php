@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 
@@ -81,5 +82,31 @@ class CouponController extends Controller
     public function destroy(Coupon $coupon)
     {
         //
+    }
+
+    public function apply(Request $request)
+    {
+        if(empty($request->code)) {
+            return request()->json(404, [
+                'message' => 'Code not found'
+            ]);
+        }
+
+        $date = Carbon::today();
+
+        $coupon = Coupon::where('code', $request->code)
+                    ->where('active', true)
+                    ->where('end_date', '>=', $date)
+                    ->first();
+
+        if($coupon) {
+            return request()->json(200,[
+                'porcent' => $coupon->discount_percent
+            ]);
+        }else {
+            return request()->json(404, [
+                'message' => 'Code not found'
+            ]);
+        }
     }
 }

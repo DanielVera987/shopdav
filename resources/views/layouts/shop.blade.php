@@ -84,10 +84,10 @@
                 <i class="fa fa-cc-paypal" aria-hidden="true"></i>    
                 <i class="fa fa-cc-stripe" aria-hidden="true"></i>    
             </div>
-        </div>
+          </div>
         </footer>
 
         <script src="{{ asset('js/shop.js') }}"></script>
-        <script src="{{ asset('js/checkout.js') }}"></script>
+        {{ $scripts ?? '' }}
   </body>
 </html>

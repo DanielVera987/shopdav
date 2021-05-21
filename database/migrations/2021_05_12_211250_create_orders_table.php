@@ -21,6 +21,10 @@ class CreateOrdersTable extends Migration
             $table->foreignId('order_statu_id')
                 ->references('id')
                 ->on('order_status');
+            $table->foreignId('coupon_id')
+                ->nullable()
+                ->references('id')
+                ->on('coupons');
             $table->string('shipping_type'); // Entrega a Domicilio o Tienda
             $table->float('shipping_cost'); // Costo de Envio
             $table->timestamps();

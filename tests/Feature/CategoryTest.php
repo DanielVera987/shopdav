@@ -35,7 +35,7 @@ class CategoryTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_screen_create_new_category_permissions_admin()
+    /* public function test_screen_create_new_category_permissions_admin()
     {
         
     }
@@ -43,5 +43,5 @@ class CategoryTest extends TestCase
     public function test_create_new_category_with_admin()
     {
 
-    }
+    } */
 }

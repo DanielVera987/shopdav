@@ -15,9 +15,6 @@ class CreateCouponsTable extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')
-                ->references('id')
-                ->on('products');
             $table->string('name');
             $table->string('code');
             $table->boolean('active');
