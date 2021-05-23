@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        return view('admin.categories.list', compact('categories'));
     }
 
     /**
@@ -31,7 +32,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return "Route Create Category";
+        $categories = Category::all();
+        return view('admin.categories.create', compact('categories'));
     }
 
     /**
@@ -40,9 +42,20 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        if($request->hasFile('image')) {
+
+            $imageName = $request->file('image')->store('categories');
+            dd($imageName);
+
+            Category::create([
+                "name" => $request->name,
+                "description" => $request->description
+            ]);
+
+            return redirect()->route('admin.categories.index')->with(['success', 'Categoria creada']);    
+        }
     }
 
     /**

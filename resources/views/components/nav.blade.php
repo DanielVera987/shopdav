@@ -81,11 +81,11 @@
                     <x-slot name="content">
                             @if (Route::has('register'))
                                 <x-dropdown-link :href="route('register')">
-                                    {{ __('Register') }}
+                                    {{ __('Registrarse') }}
                                 </x-dropdown-link>
                             @endif
                             <x-dropdown-link :href="route('login')">
-                                {{ __('Login') }}
+                                {{ __('Iniciar Sesión') }}
                             </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>

@@ -15,6 +15,12 @@ class FrontendController extends Controller
         return view('welcome', compact('categories'));
     }
 
+    public function categories()
+    {
+        $categories = Category::all();
+        return view('categories.index', compact('categories'));
+    }
+
     public function shop_index(Request $request)
     {
         $subcategories = Subcategory::with('product')->select('id', 'name')->get();

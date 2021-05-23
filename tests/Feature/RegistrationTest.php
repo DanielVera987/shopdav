@@ -30,6 +30,8 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
+        Role::create(['name' => 'user']);
+
         $response = $this->post('/register', [
             'name' => 'Test User',
             'surname' => 'test',
@@ -39,7 +41,7 @@ class RegistrationTest extends TestCase
         ]);
         
         $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect('/');
     }
 
    
