@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CouponController;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\SubcategoryController;
 
 // Open Routes
     Route::get('/', [FrontendController::class, 'index'])->name('index');
@@ -31,14 +32,32 @@ Route::middleware('auth', 'role:user')->group(function () {
 });
 
 // Adminstrator Routes
-Route::middleware('auth', 'role:super-admin')->group(function () {
-    Route::get('/admin/dashboard', function () { return view('dashboard'); })->name('dashboard');
+Route::middleware('auth', 'role:super-admin')
+    ->prefix('admin')
+    ->group(function () 
+    {
+        Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
-    //CRUD Categories
-    Route::get('/admin/categories/index', [CategoryController::class, 'index'])->name('admin.categories.index');
-    Route::get('/admin/categories/create', [CategoryController::class, 'create'])->name('admin.categories.create');
-    Route::post('/admin/categories/store', [CategoryController::class, 'store'])->name('admin.categories.store');
-});
+        //CRUD Categories
+        Route::resource('categories',CategoryController::class)->except(['show'])->names([
+            'index' => 'admin.categories.index',
+            'create' => 'admin.categories.create',
+            'store' => 'admin.categories.store',
+            'edit' => 'admin.categories.edit',
+            'update' => 'admin.categories.update',
+            'destroy' => 'admin.categories.destroy'
+        ]);
+
+        //CRUD Subcategory
+        Route::resource('subcategories', SubcategoryController::class)->except(['show'])->names([
+            'index' => 'admin.subcategories.index',
+            'create' => 'admin.subcategories.create',
+            'store' => 'admin.subcategories.store',
+            'edit' => 'admin.subcategories.edit',
+            'update' => 'admin.subcategories.update',
+            'destroy' => 'admin.subcategories.destroy'
+        ]);
+    });
 
 // Login & Register Routes
 require __DIR__.'/auth.php';

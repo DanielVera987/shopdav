@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class SubcategoryController extends Controller
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::with('category')->get();
+
+        return view('admin.subcategories.index', compact('subcategories'));
     }
 
     /**
@@ -24,7 +27,8 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.subcategories.create', compact('categories'));
     }
 
     /**
@@ -35,18 +39,7 @@ class SubcategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subcategory  $subcategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Subcategory $subcategory)
-    {
-        //
     }
 
     /**

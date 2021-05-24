@@ -7,7 +7,7 @@
 
       <!-- Main content -->
       <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-        <h3 class="mt-6 text-xl">Crear Nueva Categoria</h3>
+        <h3 class="mt-6 text-xl">Crear Nueva Sub-Categoria</h3>
         <br />
         @if (session()->has('success'))
           <x-alert color="green" message="{{ session()->get('success') }}" />
@@ -23,7 +23,7 @@
             <div class="-mx-3 md:flex mb-6">
               <div class="md:w-full px-3 mb-6 md:mb-0">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="name">
-                  Nombre de Categoria
+                  Nombre de Sub-Categoria
                 </label>
                 <input 
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('name')) border-red-500 @endif rounded py-3 px-4 mb-3" 
@@ -54,9 +54,37 @@
                   id="description" 
                   value="{{ old('description')}}"
                   placeholder="Categoria de Computadoras" 
-                  required/>
+                  required
+                />
 
                 @error('description')
+                  <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                    {{ $message }}
+                  </span>
+                @enderror
+              </div>
+            </div>
+
+            <div class="-mx-3 md:flex mb-6">
+              <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="description">
+                  Categoria Relacionada
+                </label>
+                <select
+                  class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('description')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3" 
+                  name="category"
+                  id="category" 
+                  value="{{ old('category')}}"
+                  placeholder="Categoria de Computadoras"
+                  required>
+                  
+                  <option value="" selected disabled>Seleccionar...</option>
+                  @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  @endforeach
+                </select>
+
+                @error('category')
                   <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                     {{ $message }}
                   </span>
@@ -75,7 +103,7 @@
                           <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                       </svg>
                       <span class="mt-2 text-base leading-normal">Seleciona Imagen</span>
-                      <input type='file' id="image" required name="image" class="hidden" />
+                      <input type='file' id="image" name="image" class="hidden" />
                   </label>
                 </div>
               </div>

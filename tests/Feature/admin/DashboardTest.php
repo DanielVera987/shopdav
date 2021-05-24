@@ -18,15 +18,14 @@ class DashboardTest extends TestCase
      */
     public function test_redirect_in_login_without_authentication()
     {
-        $response = $this->get('/admin/dashboard');
+        $response = $this->get(route('dashboard'));
 
         $response->assertRedirect('/login');
     }
 
     public function test_admin_can_authenticate_using_the_login_screen()
     {
-        Role::create(['name' => 'super-admin']);
-        $user = User::factory()->create();
+        $user = User::factory()->create(['email' => 'admin@admin.com']);
         $user->assignRole('super-admin');
 
         $response = $this->post('/login', [

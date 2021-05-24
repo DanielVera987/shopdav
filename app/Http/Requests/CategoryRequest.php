@@ -23,10 +23,16 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
+        $required = "";
+        
+        if(request()->method() != 'PUT') {
+            $required = 'required|';
+        }
+
         return [
             "name" => "required|max:255|string",
             "description" => "required|string",
-            "image" => "required|image"
+            "image" => "{$required}|image|mimes:jpeg,png,jpg,gif,svg"
         ];
     }
 }
