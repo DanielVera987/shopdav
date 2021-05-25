@@ -7,7 +7,7 @@
 
       <!-- Main content -->
       <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-        <h3 class="mt-6 text-xl">Actualizar Sub-Categoria</h3>
+        <h3 class="mt-6 text-xl">Crear Nueva Sub-Categoria</h3>
         <br />
         @if (session()->has('success'))
           <x-alert color="green" message="{{ session()->get('success') }}" />
@@ -17,8 +17,9 @@
           <x-alert color="red" message="{{ session()->get('fail') }}" />
         @endif
 
-        <form action="{{ route('admin.subcategories.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.subcategories.update', $subcategory->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
+          @method('PUT')
           <div class=" px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
             <div class="-mx-3 md:flex mb-6">
               <div class="md:w-full px-3 mb-6 md:mb-0">
@@ -30,7 +31,7 @@
                   type="text" 
                   id="name" 
                   name="name"
-                  value="{{ old('name') }}"
+                  value="{{ $subcategory->name }}"
                   placeholder="Computadoras" 
                   required/>
                 
@@ -52,7 +53,7 @@
                   type="text" 
                   name="description"
                   id="description" 
-                  value="{{ old('description')}}"
+                  value="{{ $subcategory->description }}"
                   placeholder="Categoria de Computadoras" 
                   required
                 />
@@ -78,9 +79,9 @@
                   placeholder="Categoria de Computadoras"
                   required>
                   
-                  <option value="" selected disabled>Seleccionar...</option>
+                  <option value="" disabled>Seleccionar...</option>
                   @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @if($subcategory->category_id == $category->id) selected @endif>{{ $category->name }}</option>
                   @endforeach
                 </select>
 

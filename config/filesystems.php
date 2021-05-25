@@ -49,6 +49,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'subcategories' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/subcategories'),
+            'url' => env('APP_URL').'/storage/subcategories',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -75,6 +82,7 @@ return [
     'links' => [
         public_path('storage') => storage_path('app/public'),
         public_path('storage/categories') => storage_path('app/public/categories'),
+        public_path('storage/subcategories') => storage_path('app/public/subcategories'),
     ],
 
 ];

@@ -87,8 +87,8 @@
                             <div class="flex-shrink-0 w-10 h-10">
                               <img
                               class="w-10 h-10 rounded-full"
-                              @if (Storage::disk('categories')->exists($subcategory->image))
-                                src="{{ asset("/storage/categories/{$subcategory->image}") }}"
+                              @if (Storage::disk('subcategories')->exists($subcategory->image))
+                                src="{{ asset("/storage/subcategories/{$subcategory->image}") }}"
                               @else
                                 src="https://via.placeholder.com/150"
                               @endif
@@ -97,8 +97,8 @@
                           </div>
                           </td>
                           <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                            <a href="{{ route('admin.categories.edit', $subcategory->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            <form action="{{ route('admin.categories.destroy', $subcategory->id) }}" method="POST">
+                            <a href="{{ route('admin.subcategories.edit', $subcategory->id) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <form action="{{ route('admin.subcategories.destroy', $subcategory->id) }}" method="POST">
                               @csrf
                               @method('DELETE')
                               <button type="submit" class="text-indigo-600 hover:text-indigo-900">Eliminar</button>
