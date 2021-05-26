@@ -26,14 +26,7 @@ class CategoryTest extends TestCase
 
     public function test_admin_can_create_new_category()
     {
-        Role::create(['name' => 'super-admin']);
-        $user = User::factory()->create();
-        $user->assignRole('super-admin');
-
-        $response = $this->post('/login', [
-            'email' => $user->email,
-            'password' => 'password',
-        ]);
+        $this->admin_authenticate();
 
         Storage::fake('categories');
         $image = UploadedFile::fake()->image('new_category.jpg');

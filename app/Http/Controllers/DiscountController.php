@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DiscountRequest;
 use App\Models\Discount;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        //
+        $discounts = Discount::all();
+        return view('admin.discounts.index', compact('discounts'));
     }
 
     /**
@@ -24,29 +26,29 @@ class DiscountController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.discounts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\request\DiscountRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiscountRequest $request)
     {
-        //
-    }
+        $active = (isset($request->active))
+                 ? true
+                 : false;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Discount  $discount
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Discount $discount)
-    {
-        //
+        Discount::create([
+            "name" => $request->name,
+            "description" => $request->description,
+            "discount_percent" => $request->discount_percent,
+            "active" => $active
+        ]);
+        
+        return redirect()->route('admin.discounts.index')->with('success', 'Descuento creado');
     }
 
     /**
@@ -57,19 +59,30 @@ class DiscountController extends Controller
      */
     public function edit(Discount $discount)
     {
-        //
+        return view('admin.discounts.edit',compact('discount'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\request\DiscountRequest  $request
      * @param  \App\Models\Discount  $discount
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Discount $discount)
+    public function update(DiscountRequest $request, Discount $discount)
     {
-        //
+        $active = (isset($request->active))
+        ? true
+        : false;
+
+        $discount->update([
+            "name" => $request->name,
+            "description" => $request->description,
+            "discount_percent" => $request->discount_percent,
+            "active" => $active
+        ]);
+
+        return redirect()->route('admin.discounts.index')->with('success', 'Descuento actualizado');
     }
 
     /**
@@ -80,6 +93,8 @@ class DiscountController extends Controller
      */
     public function destroy(Discount $discount)
     {
-        //
+        $discount->delete();
+
+        return redirect()->route('admin.discounts.index')->with('success', 'Descuento eliminado');
     }
 }

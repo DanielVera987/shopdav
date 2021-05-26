@@ -7,7 +7,7 @@
 
       <!-- Main content -->
       <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-        <h3 class="mt-6 text-xl">Crear Nueva Sub-Categoria</h3>
+        <h3 class="mt-6 text-xl">Actualizar Sub-Categoria</h3>
         <br />
         @if (session()->has('success'))
           <x-alert color="green" message="{{ session()->get('success') }}" />
@@ -98,6 +98,7 @@
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="image">
                   Subir Imagen
                 </label>
+                <img src="{{ asset($subcategory->image) }}" width="120" class="img-responsive mx-2 my-3" id="imgPreview" alt="">
                 <div class="flex w-full items-center justify-center bg-grey-lighter @if($errors->has('image')) border border-red-500 @endif">
                   <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:text-black">
                       <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -130,9 +131,11 @@
 
           
         </form>
-
       </main>
       
+      <x-slot name="scripts">
+        <script src="{{ asset('/js/admin.js') }}"></script>
+      </x-slot>
   </div>
 
 </x-app-layout>
