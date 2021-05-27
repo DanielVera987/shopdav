@@ -56,7 +56,7 @@ class DiscountTest extends TestCase
         ]);
     }
 
-    public function test_admin_can_be_renderd_edit_discounts()
+    public function test_admin_can_be_renderd_screen_edit_discounts()
     {
         $this->admin_authenticate();
 
@@ -67,20 +67,21 @@ class DiscountTest extends TestCase
             ->assertSee('Actualizar Descuento');
     }
 
-    public function test_admin_can_be_renderd_update_discounts()
+    public function test_admin_can_be_update_discounts()
     {
         $this->admin_authenticate();
 
         $discount = Discount::factory()->create();
 
-        $response = $this->get(route('admin.discounts.update', $discount->id), [
+        $response = $this->put(route('admin.discounts.update', $discount->id), [
             "name" => "New discount update",
             "description" => "Desc description",
-            "discount_percent" => 50
+            "discount_percent" => 50,
+            "active" => false
         ]);
 
-        $response->assertStatus(200)
-            ->assertSee('Descuento actualizado');
+        $response->assertStatus(302)
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('discounts',[
             "name" => "New discount update",

@@ -13,8 +13,8 @@ use App\Http\Controllers\SubcategoryController;
 // Open Routes
     Route::get('/', [FrontendController::class, 'index'])->name('index');
     Route::get('/categories', [FrontendController::class, 'categories'])->name('categories.index');
-    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products', [FrontendController::class, 'getProducts'])->name('products.index');
+    Route::get('/products/{product}', [FrontendController::class, 'getOneProduct'])->name('products.show');
     Route::get('/shop', [FrontendController::class, 'shop_index'])->name('shop.index');
 
     // Router Cart
@@ -78,6 +78,26 @@ Route::middleware('auth', 'role:super-admin')
             'edit' => 'admin.discounts.edit',
             'update' => 'admin.discounts.update',
             'destroy' => 'admin.discounts.destroy'
+        ]);
+
+        //CRUD Coupons 
+        Route::resource('coupons', CouponController::class)->except(['show'])->names([
+            'index' => 'admin.coupons.index',
+            'create' => 'admin.coupons.create',
+            'store' => 'admin.coupons.store',
+            'edit' => 'admin.coupons.edit',
+            'update' => 'admin.coupons.update',
+            'destroy' => 'admin.coupons.destroy'
+        ]);
+
+        //CRUD Products
+        Route::resource('products', ProductController::class)->except(['show'])->names([
+            'index' => 'admin.products.index',
+            'create' => 'admin.products.create',
+            'store' => 'admin.products.store',
+            'edit' => 'admin.products.edit',
+            'update' => 'admin.products.update',
+            'destroy' => 'admin.products.destroy'
         ]);
     });
 

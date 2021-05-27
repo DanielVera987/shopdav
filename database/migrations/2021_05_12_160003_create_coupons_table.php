@@ -19,8 +19,8 @@ class CreateCouponsTable extends Migration
             $table->string('code');
             $table->boolean('active');
             $table->decimal('discount_percent', 10, 2);
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CouponRequest;
 use Carbon\Carbon;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
@@ -15,7 +16,9 @@ class CouponController extends Controller
      */
     public function index()
     {
-        //
+        $coupons = Coupon::all();
+
+        return view('admin.coupons.index', compact('coupons'));
     }
 
     /**
@@ -25,29 +28,31 @@ class CouponController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.coupons.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\request\CouponRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CouponRequest $request)
     {
-        //
-    }
+        $active = (isset($request->active))
+            ? true
+            : false;
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Coupon  $coupon
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Coupon $coupon)
-    {
-        //
+        Coupon::create([
+            'name' => $request->name,
+            'code' => $request->code,
+            'active' => $active,
+            'discount_percent' => $request->discount_percent,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date
+        ]);
+
+        return redirect()->route('admin.coupons.index')->with('success', 'Cupon creado');
     }
 
     /**
@@ -58,7 +63,7 @@ class CouponController extends Controller
      */
     public function edit(Coupon $coupon)
     {
-        //
+        return view('admin.coupons.edit', compact('coupon'));
     }
 
     /**
@@ -68,9 +73,22 @@ class CouponController extends Controller
      * @param  \App\Models\Coupon  $coupon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(CouponRequest $request, Coupon $coupon)
     {
-        //
+        $active = (isset($request->active))
+            ? true
+            : false;
+
+        $coupon->update([
+            'name' => $request->name,
+            'code' => $request->code,
+            'active' => $active,
+            'discount_percent' => $request->discount_percent,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date
+        ]);
+
+        return redirect()->route('admin.coupons.index')->with('success', 'Cupon actualizado');
     }
 
     /**

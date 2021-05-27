@@ -98,7 +98,7 @@ class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overfl
     </li>
     <li>
         <a
-            href="{{ route('admin.brands.index') }}"
+            href="{{ route('admin.coupons.index') }}"
             class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
             :class="{'justify-center': !isSidebarOpen}">
             <span>
@@ -109,7 +109,7 @@ class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overfl
     </li>
     <li>
         <a
-            href="{{ route('admin.brands.index') }}"
+            href="{{ route('admin.products.index') }}"
             class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
             :class="{'justify-center': !isSidebarOpen}">
             <span>

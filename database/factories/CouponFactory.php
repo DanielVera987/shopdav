@@ -22,7 +22,6 @@ class CouponFactory extends Factory
     public function definition()
     {
         return [
-            'product_id' => '',
             'name' => $this->faker->name(),
             'code' => $this->faker->randomDigit(),
             'active' => $this->faker->randomDigit(),
