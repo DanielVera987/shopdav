@@ -12,7 +12,7 @@
 
           <h3 class="flex items-centermt-6 text-xl">Lista de Productos</h3>
           
-          <a href="{{ route('admin.categories.create') }}" class="flex items-center p-2 bg-gray-800 hover:bg-gray-700 text-sm space-y-2 text-white rounded-md">
+          <a href="{{ route('admin.products.create') }}" class="flex items-center p-2 bg-gray-800 hover:bg-gray-700 text-sm space-y-2 text-white rounded-md">
               <span>Crear Nuevo</span>
           </a>
 
@@ -79,10 +79,10 @@
                             <div class="flex-shrink-0 w-10 h-10">
                               <img
                               class="w-10 h-10 rounded-full"
-                              @if (Storage::disk('products')->exists($product->images[0]->path))
+                              @if (count($product->images) > 0 && Storage::disk('products')->exists($product->images[0]->path)  )
                                 src="{{ asset("/storage/products/{$product->images[0]->path}") }}"
                               @else
-                                src="{{ $product->images[0]->path ?? '' }}"
+                                src="https://via.placeholder.com/150"
                               @endif
                               alt=""
                               />

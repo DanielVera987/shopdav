@@ -93,7 +93,15 @@
                           <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                               <div class="ml-4">
-                                  <div class="text-sm font-medium text-gray-900">{{ $discount->active }}</div>
+                                  <div class="text-sm font-medium text-gray-900"> 
+                                    <span 
+                                      @if( $discount->active == 1 ) 
+                                        class="text-green-600"> Activo
+                                      @else 
+                                        class="text-red-600"> Desactivado
+                                      @endif
+                                    </span>
+                                  </div>
                               </div>
                             </div>
                           </td>

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
+use App\Models\Brand;
+use App\Models\Color;
+use App\Models\Discount;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,29 +30,23 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $subcategories = Subcategory::all();
+        $brands = Brand::all();
+        $colors = Color::all();
+        $discounts = Discount::where('active', 1)->get();
+
+        return view('admin.products.create', compact('subcategories', 'brands', 'colors', 'discounts'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\request\ProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-
+        dd($request);
     }
 
     /**
