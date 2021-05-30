@@ -12,9 +12,9 @@
         @if (session()->has('success'))
           <x-alert color="green" message="{{ session()->get('success') }}" />
         @endif
-        
+
         @if (session()->has('warning'))
-          <x-alert color="red" message="{{ session()->get('fail') }}" />
+          <x-alert color="red" message="{{ session()->get('warning') }}" />
         @endif
 
         @if ($errors->any())
@@ -34,15 +34,15 @@
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="name">
                   Nombre del Producto <small class="text-red-500 font-bold text-sm">*</small>
                 </label>
-                <input 
+                <input
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('name')) border-red-500 @endif rounded py-3 px-4 mb-3" 
-                  type="text" 
-                  id="name" 
+                  type="text"
+                  id="name"
                   name="name"
                   value="{{ old('name') }}"
-                  placeholder="Celular HUAWEI" 
+                  placeholder="Celular HUAWEI"
                   required/>
-                
+
                 @error('name')
                   <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                     {{ $message }}
@@ -58,7 +58,7 @@
                   Descripción <small class="text-red-500 font-bold text-sm">*</small>
                 </label>
                 <textarea name="content" class="border-2 border-gray-500">
-                                
+                  {{ old('content') }}
                 </textarea>
 
                 @error('content')
@@ -74,14 +74,14 @@
               <div class="md:w-full px-3">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="code">
                   Código <small class="text-red-500 font-bold text-sm">*</small>
-                </label> 
-                <input 
+                </label>
+                <input
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('code')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3" 
-                  type="text" 
+                  type="text"
                   name="code"
-                  id="code" 
+                  id="code"
                   value="{{ old('code')}}"
-                  placeholder="0000000001" 
+                  placeholder="0000000001"
                   required/>
 
                 @error('code')
@@ -92,7 +92,7 @@
               </div>
             </div>
 
-            {{-- Name --}}
+            {{-- Price --}}
             <div class="-mx-3 md:flex mb-6">
               <div class="md:w-full px-3">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="price">
@@ -144,14 +144,14 @@
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="subcategory_id">
                   Sub-Categoria <small class="text-red-500 font-bold text-sm">*</small>
                 </label>
-                
+
                 <select
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('subcategory_id')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3" 
                   name="subcategory_id"
-                  id="subcategory_id" 
+                  id="subcategory_id"
                   value="{{ old('subcategory_id')}}"
                   required>
-                  
+
                   <option value="" selected disabled>Seleccionar...</option>
                   @foreach($subcategories as $subcategory)
                     <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
@@ -176,47 +176,17 @@
                 <select
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('brand_id')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3" 
                   name="brand_id"
-                  id="brand_id" 
+                  id="brand_id"
                   value="{{ old('brand_id')}}"
                   required>
-                  
+
                   <option value="" selected disabled>Seleccionar...</option>
                   @foreach($brands as $brand)
                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                   @endforeach
                 </select>
 
-                @error('brand')
-                  <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                    {{ $message }}
-                  </span>
-                @enderror
-              </div>
-            </div>
-            
-            {{-- Sizes --}}
-            <div class="-mx-3 md:flex mb-6">
-              <div class="md:w-full px-3">
-                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="sizes">
-                  Tamaños <small class="text-red-500 font-bold text-sm">*</small>
-                </label> 
-
-                @foreach($brands as $brand)
-                <div class="mt-2">
-                  <div>
-                    <label class="inline-flex items-center">
-                      <input 
-                        type="checkbox" 
-                        class="form-checkbox" 
-                        name="sizes[]" 
-                        value="{{ $brand->id }}">
-                      <span class="ml-2">{{ $brand->name }}</span>
-                    </label>
-                  </div>
-                </div>
-                @endforeach
-
-                @error('sizes')
+                @error('brand_id')
                   <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                     {{ $message }}
                   </span>
@@ -259,15 +229,14 @@
               <div class="md:w-full px-3">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="discount_id">
                   Aplicar Descuento
-                </label> 
+                </label>
 
                 <select
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('discount_id')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3" 
                   name="discount_id"
-                  id="discount_id" 
-                  value="{{ old('discount_id')}}"
-                  required>
-                  
+                  id="discount_id"
+                  value="{{ old('discount_id')}}">
+
                   <option value="" selected disabled>Seleccionar...</option>
                   @foreach($discounts as $discount)
                     <option value="{{ $discount->id }}">{{ $discount->name }} - {{ $discount->discount_percent }}%</option>

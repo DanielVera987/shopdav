@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductRequest;
 use App\Models\Brand;
 use App\Models\Color;
-use App\Models\Discount;
+use App\Models\Image;
 use App\Models\Product;
+use App\Models\Discount;
 use App\Models\Subcategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\ProductRequest;
+use App\Models\ColorProduct;
+use App\Models\Size;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -19,6 +25,7 @@ class ProductController extends Controller
      */
     public function index()
     {
+        // TODO: generar codigo no repetitivo
         $products = Product::with('images')->paginate();
         return view('admin.products.index', compact('products'));
     }
@@ -46,7 +53,66 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        dd($request);
+        //TODO: Reconstruir la base de datos de tamaño de muchos a muchos
+        //TODO: Verificar que el codigo sea unico
+        if (
+            $request->quantity <= 0
+            || !Subcategory::find($request->subcategory_id)
+            || !Brand::find($request->brand_id)
+        ) {
+            return back()->with('warning', 'Algo salio mal intentalo nuevamente');
+        }
+
+        if (isset($request->discount_id)) {
+            if (!Discount::where('active', 1)->where('id', $request->discount_id)->first()) {
+                return back()->with('warning', 'Algo salio mal intentalo nuevamente');
+            }
+        }
+
+        $product = Product::create([
+            'name' => $request->name,
+            'description' => $request->content,
+            'code' => $request->code,
+            'price' => round($request->price, 2),
+            'quantity' => intval($request->quantity),
+            'subcategory_id' => $request->subcategory_id,
+            'brand_id' => $request->brand_id,
+            'discount_id' => $request->discount_id ?? null
+        ]);
+
+
+        $prodId = $product->id;
+        for ($numberImage = 1; $numberImage < 6; $numberImage++) {
+
+            if ($request->hasFile("image{$numberImage}")) {
+                $image = $request->file("image{$numberImage}");
+
+                $path = time() . '_' . Str::uuid() . '.' . $image->getClientOriginalExtension();
+
+                Image::create([
+                    'product_id' => $prodId,
+                    'name' => "image${numberImage}",
+                    'path' => $path,
+                ]);
+
+                Storage::disk('products')->put($path, File::get($image));
+            }
+        }
+
+        foreach ($request->colors as $colorId) {
+            ColorProduct::create([
+                'product_id' => $prodId,
+                'color_id' => $colorId
+            ]);
+        }
+
+        foreach ($request->sizes as $sizeId) {
+            Size::create([
+                ''
+            ]);
+        }
+
+        return redirect()->route('admin.products.index')->with('success', 'Producto Creado');
     }
 
     /**

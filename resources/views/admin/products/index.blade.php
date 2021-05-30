@@ -11,7 +11,7 @@
         <div class="flex justify-between">
 
           <h3 class="flex items-centermt-6 text-xl">Lista de Productos</h3>
-          
+
           <a href="{{ route('admin.products.create') }}" class="flex items-center p-2 bg-gray-800 hover:bg-gray-700 text-sm space-y-2 text-white rounded-md">
               <span>Crear Nuevo</span>
           </a>
@@ -22,7 +22,7 @@
         @if (session()->has('success'))
           <x-alert color="green" message="{{ session()->get('success') }}" />
         @endif
-        
+
         @if (session()->has('warning'))
           <x-alert color="red" message="{{ session()->get('fail') }}" />
         @endif
