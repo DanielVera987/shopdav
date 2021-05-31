@@ -106,12 +106,6 @@ class ProductController extends Controller
             ]);
         }
 
-        foreach ($request->sizes as $sizeId) {
-            Size::create([
-                ''
-            ]);
-        }
-
         return redirect()->route('admin.products.index')->with('success', 'Producto Creado');
     }
 

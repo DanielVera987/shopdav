@@ -6,7 +6,10 @@ use Tests\TestCase;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Subcategory;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -46,28 +49,37 @@ class ProductTest extends TestCase
             ->create();
 
         $brand = Brand::factory()->create();
+        $colors = Color::factory()->create();
 
-        $response = $this->post(route('admin.products.store'), [
-            'name' => 'Name of product',
-            'description' => 'Description of product',
-            'code' => 0000000001,
-            'price' => 52.30,
-            'quantity' => 5,
-            'subcategory_id' => $subcategory->id,
-            'brand_id' => $brand->id,
-            'sizes' => [],
-            'colors' => [],
-            'discount_id' => null,
-            'image1' => null,
-            'image2' => null,
-            'image3' => null,
-            'image4' => null,
-            'image5' => null,
-        ]);
+        Storage::fake('categories');
+        $image = UploadedFile::fake()->image('new_category.jpg');
+
+        $response = $this->from(route('admin.products.index'))
+            ->post(route('admin.products.store'), [
+                'name' => 'Name of product',
+                'content' => 'Description of product',
+                'code' => 0000000001,
+                'price' => 52.30,
+                'quantity' => 5.00,
+                'subcategory_id' => $subcategory->id,
+                'brand_id' => $brand->id,
+                'colors' => [
+                    "0" => $colors->id
+                ], 
+                /*'discount_id' => null, */
+                'image1' => $image,
+                'image2' => null,
+                'image3' => null,
+                'image4' => null,
+                'image5' => null,
+            ]
+        );
+
+        //sdd($response);
 
         $response->assertStatus(302)
             ->assertRedirect(route('admin.products.index'))
-            ->assertSee('Producto Creado');
+            ->assertSessionHas('success');
 
         $this->assertDatabaseHas('products', [
             'name' => 'Name of product',

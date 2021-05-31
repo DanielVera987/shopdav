@@ -31,8 +31,8 @@ class ProductRequest extends FormRequest
             'quantity' => 'required|numeric',
             'subcategory_id' => 'required|integer',
             'brand_id' => 'required|integer',
-            'sizes' => 'required',
-            'sizes.*' => 'required',
+            /* 'sizes' => 'required',
+            'sizes.*' => 'required', */
             'colors' => 'required',
             'colors.*' => 'required',
             'discount_id' => 'integer',
