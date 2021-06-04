@@ -75,7 +75,7 @@ class ProductTest extends TestCase
             ]
         );
 
-        //sdd($response);
+        //dd($response);
 
         $response->assertStatus(302)
             ->assertRedirect(route('admin.products.index'))
