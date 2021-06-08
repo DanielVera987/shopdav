@@ -18,7 +18,8 @@ class Product extends Model
         'quantity',
         'subcategory_id',
         'brand_id',
-        'discount_id'
+        'discount_id',
+        'color_id'
     ];
 
     public static function filtersAnPaginate()
@@ -53,12 +54,12 @@ class Product extends Model
 
     public function sizes()
     {
-        return $this->hasMany(Size::class);
+        return $this->belongsToMany(Size::class, 'sizes_products');
     }
 
     public function color()
     {
-        return $this->belongsToMany(Color::class, 'color_products');
+        return $this->belongsTo(Color::class);
     }
 
     public function cart()

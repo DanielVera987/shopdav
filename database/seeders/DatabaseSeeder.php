@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
             ->count(4)
             ->for($product)
             ->create();
-        
+
         $sizes = Size::factory()
             ->count(4)
             ->for($product)
