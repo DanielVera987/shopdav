@@ -90,30 +90,11 @@ class DatabaseSeeder extends Seeder
 
         $sizes = Size::factory()
             ->count(4)
-            ->for($product)
             ->create();
 
         $colors = Color::factory()
             ->count(3)
             ->create();
-
-        foreach ($products as $product) {
-            foreach ($colors as $color) {
-                ColorProduct::firstOrCreate([
-                    'product_id' => $product->id,
-                    'color_id' => $color->id,
-                ]);
-            }
-        }       
-
-        foreach ($sizes as $size) {
-            foreach ($colors as $color) {
-                ColorSize::firstOrCreate([
-                    'color_id' => $color->id,
-                    'size_id' => $size->id,
-                ]);
-            }
-        }
 
         $orderStatus = OrderStatu::factory()->create([
             'name' => 'Pendiente'
@@ -127,7 +108,7 @@ class DatabaseSeeder extends Seeder
         OrderItem::factory(3)
             ->for($order)
             ->create();
-/* 
+/*
         Shipping::factory()
             ->for($order)
             ->create(); */
