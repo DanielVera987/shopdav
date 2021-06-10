@@ -41,8 +41,15 @@ class ProductController extends Controller
         $brands = Brand::all();
         $colors = Color::all();
         $discounts = Discount::where('active', 1)->get();
+        $sizes = Size::all();
 
-        return view('admin.products.create', compact('subcategories', 'brands', 'colors', 'discounts'));
+        return view('admin.products.create', compact(
+            'subcategories',
+            'brands',
+            'colors',
+            'discounts',
+            'sizes'
+        ));
     }
 
     /**
@@ -53,7 +60,6 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        //TODO: Reconstruir la base de datos de tamaño de muchos a muchos
         //TODO: Verificar que el codigo sea unico
         if (
             $request->quantity <= 0
@@ -77,13 +83,12 @@ class ProductController extends Controller
             'quantity' => intval($request->quantity),
             'subcategory_id' => $request->subcategory_id,
             'brand_id' => $request->brand_id,
+            'color_id' => $request->color_id,
             'discount_id' => $request->discount_id ?? null
         ]);
 
-
         $prodId = $product->id;
         for ($numberImage = 1; $numberImage < 6; $numberImage++) {
-
             if ($request->hasFile("image{$numberImage}")) {
                 $image = $request->file("image{$numberImage}");
 
@@ -97,13 +102,6 @@ class ProductController extends Controller
 
                 Storage::disk('products')->put($path, File::get($image));
             }
-        }
-
-        foreach ($request->colors as $colorId) {
-            ColorProduct::create([
-                'product_id' => $prodId,
-                'color_id' => $colorId
-            ]);
         }
 
         return redirect()->route('admin.products.index')->with('success', 'Producto Creado');

@@ -171,7 +171,7 @@
               <div class="md:w-full px-3">
                 <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="brand_id">
                   Marca <small class="text-red-500 font-bold text-sm">*</small>
-                </label> 
+                </label>
 
                 <select
                   class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('brand_id')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3" 
@@ -197,26 +197,54 @@
             {{-- Colors --}}
             <div class="-mx-3 md:flex mb-6">
               <div class="md:w-full px-3">
-                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="colors">
-                  Colores <small class="text-red-500 font-bold text-sm">*</small>
-                </label> 
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="color_id">
+                  Color <small class="text-red-500 font-bold text-sm">*</small>
+                </label>
 
-                @foreach($colors as $color)
+                <select
+                  class="appearance-none block w-full bg-grey-lighter text-grey-darker border @if($errors->has('color_id')) border-red-500 @endif border-grey-lighter rounded py-3 px-4 mb-3"
+                  name="color_id"
+                  id="color_id"
+                  value="{{ old('color_id')}}"
+                  required>
+
+                  <option value="" selected disabled>Seleccionar...</option>
+                  @foreach($colors as $color)
+                    <option value="{{ $color->id }}">{{ $color->name }}</option>
+                  @endforeach
+                </select>
+
+                @error('color_id')
+                  <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                    {{ $message }}
+                  </span>
+                @enderror
+              </div>
+            </div>
+
+            {{-- Sizes --}}
+            <div class="-mx-3 md:flex mb-6">
+              <div class="md:w-full px-3">
+                <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="sizes">
+                  Tamaños <small class="text-red-500 font-bold text-sm">*</small>
+                </label>
+
+                @foreach($sizes as $size)
                 <div class="mt-2">
                   <div>
                     <label class="inline-flex items-center">
-                      <input 
-                        type="checkbox" 
-                        class="form-checkbox" 
-                        name="colors[]" 
-                        value="{{ $color->id }}">
-                      <span class="ml-2">{{ $color->name }}</span>
+                      <input
+                        type="checkbox"
+                        class="form-checkbox"
+                        name="sizes[]"
+                        value="{{ $size->id }}">
+                      <span class="ml-2">{{ $size->name }}</span>
                     </label>
                   </div>
                 </div>
                 @endforeach
 
-                @error('colors')
+                @error('sizes')
                   <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                     {{ $message }}
                   </span>

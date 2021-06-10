@@ -31,10 +31,9 @@ class ProductRequest extends FormRequest
             'quantity' => 'required|numeric',
             'subcategory_id' => 'required|integer',
             'brand_id' => 'required|integer',
-            /* 'sizes' => 'required',
-            'sizes.*' => 'required', */
-            'colors' => 'required',
-            'colors.*' => 'required',
+            'sizes' => 'required',
+            'sizes.*' => 'required',
+            'color_id' => 'required',
             'discount_id' => 'integer',
             'image1' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'image2' => 'image|mimes:jpeg,png,jpg,gif,svg',
